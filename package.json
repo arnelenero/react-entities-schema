@@ -1,0 +1,74 @@
+{
+  "name": "react-entities-schema",
+  "version": "0.9.1",
+  "description": "React Entities Schema - runtime type checking for React Entities",
+  "keywords": [
+    "react",
+    "state",
+    "library",
+    "redux",
+    "functional",
+    "hooks",
+    "types"
+  ],
+  "author": "Arnel Enero <aenero@gmail.com>",
+  "license": "MIT",
+  "repository": "github:arnelenero/react-entities-schema",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "typings": "./index.d.ts",
+  "files": [
+    "lib",
+    "es",
+    "src",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "build:lib": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:es": "babel src --out-dir es",
+    "build": "npm run build:lib && npm run build:es",
+    "clean": "rimraf lib es",
+    "prepare": "npm run clean && npm test",
+    "pretest": "npm run build",
+    "test": "jest",
+    "test:cov": "npm test -- --coverage"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.8.0",
+    "react-entities": "^0.9.1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-react": "^7.9.4",
+    "babel-jest": "^24.9.0",
+    "cross-env": "^5.2.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "jest": "^24.9.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-test-renderer": "^16.13.1",
+    "rimraf": "^2.7.1",
+    "sinon": "^7.5.0"
+  },
+  "jest": {
+    "testRegex": "(/test/.*\\.spec\\.js)$",
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/_setup.js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/**/index.js",
+      "!src/index.js"
+    ]
+  }
+}
