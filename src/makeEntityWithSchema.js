@@ -8,7 +8,8 @@ export const makeEntityWithSchema = (
   { initialState, schema, name = 'entity', ...actions },
   deps
 ) => {
-  if (typeof schema !== 'object') throw new Error('Schema expected for entity.');
+  if (typeof schema !== 'object')
+    throw new Error('Schema expected for entity.');
 
   const options = {};
 
@@ -19,13 +20,18 @@ export const makeEntityWithSchema = (
 
     const validatePropTypes = (currentState, updates) => {
       const newState = { ...currentState, ...updates };
-      PropTypes.checkPropTypes(strictSchema, { state: newState }, 'entity state', name);
+      PropTypes.checkPropTypes(
+        strictSchema,
+        { state: newState },
+        'entity state',
+        name
+      );
     };
 
     options.beforeSetState = validatePropTypes;
 
     // Also validate the provided initial state (if any)
-    validatePropTypes({}, initialState);
+    if (initialState) validatePropTypes({}, initialState);
   }
 
   return makeEntity(
