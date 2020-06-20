@@ -5,7 +5,7 @@ export const initializers = {
   bool: () => false,
   func: () => () => {},
   number: () => 0,
-  object: () => {},
+  object: () => ({}),
   string: () => '',
   symbol: () => Symbol(),
   node: () => '',
@@ -16,7 +16,7 @@ export const initializers = {
   oneOf: arg => arg[0],
   oneOfType: arg => initProp(arg[0], true),
   arrayOf: () => [],
-  objectOf: () => {},
+  objectOf: () => ({}),
   shape: arg => initStruct(arg),
   exact: arg => initStruct(arg),
 
@@ -24,13 +24,14 @@ export const initializers = {
 };
 
 export const initProp = (type, force) => {
-  const typeName = type.name;
-  if (!typeName) throw new Error('Invalid entity schema');
+  if (!type || !type.name) throw new Error('Invalid entity schema');
 
   // A bit confusing but a required type is NOT expected to have an `isRequired` option
   const required = type.isRequired === undefined;
 
-  const init = initializers[typeName];
+  const init = initializers[type.name];
+  if (typeof init !== 'function') throw new Error('Invalid entity schema');
+
   return required || force ? init(type.arg) : null;
 };
 

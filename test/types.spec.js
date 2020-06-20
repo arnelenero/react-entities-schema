@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import T from '../src/types';
 
 describe('T', () => {

@@ -162,19 +162,6 @@ describe('makeEntity', () => {
     }).toThrow();
   });
 
-  it('bypasses all prop type checking on Production builds', () => {
-    const { setInvalidValue, setInvalidProp } = prodHookValue[1];
-    const originalConsoleError = console.error;
-    const mockConsoleError = jest.fn();
-    console.error = mockConsoleError;
-    act(() => {
-      setInvalidValue();
-      setInvalidProp();
-    });
-    console.error = originalConsoleError;
-    expect(mockConsoleError).not.toHaveBeenCalled();
-  });
-
   it('enables checking for invalid prop type on each state update by `setState`', () => {
     const { setInvalidValue } = hookValue[1];
     const originalConsoleError = console.error;
@@ -197,6 +184,19 @@ describe('makeEntity', () => {
     });
     console.error = originalConsoleError;
     expect(mockConsoleError).toHaveBeenCalled();
+  });
+
+  it('bypasses all prop type checking on Production builds', () => {
+    const { setInvalidValue, setInvalidProp } = prodHookValue[1];
+    const originalConsoleError = console.error;
+    const mockConsoleError = jest.fn();
+    console.error = mockConsoleError;
+    act(() => {
+      setInvalidValue();
+      setInvalidProp();
+    });
+    console.error = originalConsoleError;
+    expect(mockConsoleError).not.toHaveBeenCalled();
   });
 
   it('discards non-functions apart from `initialState` and `schema` in entity spec', () => {
