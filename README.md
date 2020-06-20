@@ -81,6 +81,7 @@ Schema props that are not indicated as `isRequired` will always get an initial v
 | `T.instanceOf(C).isRequired` | `new C()` |
 | `T.oneOf([1, 2, 3]).isRequired` | `1` |
 | `T.oneOfType([T.number, T.string]).isRequired` | `0` |
+| `T.any.isRequired` | `'' `|
 
 Both `T.shape().isRequired` and `T.strict().isRequired` will get an initial value of an object with its props getting default values based on the table above.
 
