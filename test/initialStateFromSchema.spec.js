@@ -188,10 +188,15 @@ describe('initialStateFromSchema', () => {
     expect(initialState.prop).toBe('');
   });
 
-  it('throws an error if an invalid schema is specified', () => {
-    initialStateFromSchema({ prop: T.boolean });
+  it('throws an error if an invalid type is specified in schema', () => {
     expect(() => {
       initialStateFromSchema({ prop: T.boolean });
+    }).toThrow();
+  });
+
+  it('throws an error if a native object type is specified in schema', () => {
+    expect(() => {
+      initialStateFromSchema({ prop: String });
     }).toThrow();
   });
 });
