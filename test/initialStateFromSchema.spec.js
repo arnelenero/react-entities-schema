@@ -29,6 +29,7 @@ describe('initialStateFromSchema', () => {
   it('assigns T.func.isRequired an initial value of () => {}', () => {
     const initialState = initialStateFromSchema({ prop: T.func.isRequired });
     expect(typeof initialState.prop).toBe('function');
+    expect(() => initialState.prop()).not.toThrow();
   });
 
   it('assigns T.number an initial value of null', () => {
@@ -89,11 +90,13 @@ describe('initialStateFromSchema', () => {
     const initialState = initialStateFromSchema({ prop: T.elementType });
     expect(initialState.prop).toBeNull();
   });
-  it('assigns T.elementType.isRequired an initial value of function type', () => {
+  it('assigns T.elementType.isRequired an initial value of function that returns an object', () => {
     const initialState = initialStateFromSchema({
       prop: T.elementType.isRequired,
     });
     expect(typeof initialState.prop).toBe('function');
+    const e = initialState.prop();
+    expect(typeof e).toBe('object');
   });
 
   it('assigns T.instanceOf(C) an initial value of null', () => {
