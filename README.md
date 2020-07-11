@@ -62,7 +62,7 @@ Note that unlike a React component's PropTypes, the top-level structure of the s
     value: T.number.isRequired
   };
 ```
-then `setState({ wasReset: true })` will fail because `wasReset` is not defined in the schema.
+then `setState({ wasReset: true })` will fail type checking because `wasReset` is not defined in the schema.
 
 ### Automatically generating the initial state
 
